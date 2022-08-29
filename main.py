@@ -3,99 +3,55 @@
 # enemy below - codename sector clone in python for fun
 
 import random
+from movement import move_object
+
 
 # GAME BOARD
-TOP=10
-BOT=90
+# initially, this is going to be a 10x10 board, but future version
+# will have option to change board size. Right now the movement
+# lib is just written to handle a pre-determined board size. 
 
-# used to get the current pos and plot a new position based on user input
-def check_bearing(pos,course,speed):
+#initial submarine position
+sub_position = random.randrange(2,99,1)
 
+#initial destroyer position
+destroyer_position = random.randrange(3,100,1)
 
-	## NORTH MOVEMENT ##
-	if course == "N":
-    	# if they're at the top of the map already
-		while pos < TOP:
-			course = input("You can't go any further NORTH: ")
-	
-		new_pos = pos - speed
+# make sure the two ships don't start on top of each other 
+if sub_position == destroyer_position:
+	# change the sub position
+	sub_position = random.randrange(sub_position, 99, 1)
+
+# start the game !
+while True: 
+		print(
+		'''
+		Captain! A submarine has been spotted in the area. 
+		To hunt, follow the game prompts to enter the new
+		speed and direction you want to go. You can go any
+		direction (N,S,E,W) and (NE,SE,NW,SW) and your
+		speed is variable between 1 - 9 knots. A knot is 
+		a grid-square reference. For instance, if you're 
+		on grid square reference 54, setting your direction
+		WEST at 4 knots will put you at grid square reference
+		50. Each time you move, the enemy sub will move 1 space
+		in any direction. Your job is to get within 2 grid
+		squares from the sub and fire. Good luck!
+
+		Now, let's get some bearings...
+
+		...<<PING>>...
+		The enemy submarine is currently at grid square reference
+		''', sub_position)
+
+		print("Captain, our current position is ", destroyer_position)
+		print("Now we need to input our new course to chase the enemy!")
 		
-	## SOUTH MOVEMENT ##
-	elif course == "S":
-		while pos > BOT:
-       		# if they're at the bottom of the map already
-			course = input("You can't go any further SOUTH: ")
-		new_pos = pos + speed
-	
-	## EAST MOVEMENT ##
-	elif course == "E":
-		while pos % 10 == 0: 
-			course = input("You can't go any further EAST")
+		new_direction = input("Captain, what direction should we head? ") 
+		new_speed = int(input("What speed, captain ? 1 - 9 knots: "))
 
-			if pos < 11:
-				row = 1
-				row_end = 10
-			elif (pos < 21) and (pos > 10):
-				row = 2
-				row_end = 20
-			elif (pos < 31) and (pos > 20):
-				row = 3
-				row_end = 30
-			elif (pos < 41) and (pos > 30):
-				row = 4
-				row_end = 40
-			elif (pos < 51) and (pos > 40):
-				row = 5
-				row_end = 50
-			elif (pos < 61) and (pos > 50):
-				row = 6
-				row_end = 60
-			elif (pos < 71) and (pos > 60):
-				row = 7
-				row_end = 70
-			elif (pos < 81) and (pos > 70):
-				row = 8
-				row_end = 80
-			elif (pos < 91) and (pos > 80):
-				row = 9
-				row_end = 90
-			elif pos >= 91:
-				row = 10
-				row_end = 100
-
-			if row_end - pos > speed:
-					new_pos = row_end
-                   
-          
-	return new_pos
-
-
-
-# when I move the sub moves, but sub can only move 1 space at a time
-# I can move up to 9
-
-my_pos = random.randrange(1,100,1)
-sub_pos = random.randrange(2, 100,3 )
-#my_new_pos = check_bearing(44,"S", 3)
-
-new_dir = input("Compass direction ? (NSEW): ")
-new_speed = int(input("Speed (1-9): "))
-my_new_pos = check_bearing(my_pos,new_dir,new_speed)
-
-
-if my_pos == sub_pos:
-	sub_pos = random.randrange(sub_pos, 20, 3)
-
-# print("Sub position ",sub_pos, "my position ",my_pos)
-
-# get range to target
-if (sub_pos > my_pos):
-	sub_range = sub_pos - my_pos
-elif (my_pos > sub_pos):
-	sub_range = my_pos - sub_pos
-
-
-# debug - remove when ready to play
-print("Current position: ", my_pos)
-print("Range to Target: ", sub_range)
-print("New position: ", my_new_pos)
+		# move the destroyer to intercept!
+		destroyer_position = move_object(destroyer_position, new_speed, new_direction)
+		
+		# move submarine 1 spot in any direction - for now... south... 
+		sub_position = move_object(sub_position, 1, "S")
