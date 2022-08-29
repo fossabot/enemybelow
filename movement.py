@@ -18,11 +18,6 @@ def diagonal(position, speed, direction):
 		while speed > 0:
 			position -= 10
 			speed -=1
-		# we now have the new NORTH position. Let's make sure it's not a 
-		# number off the map (i.e. less than ZERO)
-		if position < TOP:
-			diff = TOP - position
-			position += diff 
 			
 	#NORTHEAST
 	if direction == "NE":
