@@ -7,7 +7,7 @@ def move_object(position, speed, direction):
 	#NORTH
 	if direction == "N":
 		# verify we're not too far north already
-		if (position < 11):
+		while (position < 11):
 			direction = input("You can't navigate any further NORTH. ")
 
 		while speed > 0:
@@ -21,14 +21,14 @@ def move_object(position, speed, direction):
 			speed -= 1
 
 	#NORTHWEST
-	elif direction == "NW":
+	if direction == "NW":
 		while speed > 0:
 			position -= 11
 			speed -= 1
 
 	#SOUTH
-	elif direction == "S":
-		if (position > 90):
+	if direction == "S":
+		while (position > 90):
 			direction = input("You can't navigate any further SOUTH. ")
 
 		while speed > 0:
@@ -36,20 +36,20 @@ def move_object(position, speed, direction):
 			speed -= 1
 
 	#SOUTHEAST
-	elif direction == "SE":
+	if direction == "SE":
 		while speed > 0:
 			position += 11
 			speed -= 1
 
 	#SOUTHWEST
-	elif direction == "SW":
+	if direction == "SW":
 		while speed > 0:
 			position += 9
 			speed -= 1
 
 	#EAST
-	elif direction == "E":
-		if position % 10 == 0:
+	if direction == "E":
+		while position % 10 == 0:
 			direction = input("You can't navigate any further EAST. ")
 
 		while speed > 0:
@@ -58,11 +58,11 @@ def move_object(position, speed, direction):
 
 	#WEST
 	
-	elif direction == "W": 
-		# west walls are 1,11,21,31,41,51...and we don't want them to hit them
-		west_walls = [1,11,21,31,41,51,61,71,81,91]
+	if direction == "W": 
+		# west boundaries  are 1,11,21,31,41,51...and we don't want them to hit them
+		west_boundary = [1,11,21,31,41,51,61,71,81,91]
 		
-		for w in west_walls:
+		for w in west_boundary:
 			if position == w:
 				direction = input("You can't navigate any further WEST. ")
 
