@@ -1,13 +1,8 @@
 def move_object(position, speed, direction):
 
-
-	# start and end points of the board
-	# this will allow the board to later be
-	# increased in size 
-
-	# TOP and BOT are constants in the main program file
-
-	# manage movement / direction
+	# move_object: this gets current position of each ship (both destroyers and sub)
+	# and validates boundaries before moving the ship to the corresponding 
+	# position based on user input in the game.
 
 	#NORTH
 	if direction == "N":
@@ -78,6 +73,4 @@ def move_object(position, speed, direction):
 		
 	return position
 
-myMove = move_object(41,2,"W")
 
-print(myMove)
