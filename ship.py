@@ -3,6 +3,9 @@ class Ship:
         
         self.pos = initialPosition
         self.direction = initialDirection
+        
+    def __depth__(self):
+        pass
 
     def move(self, position, direction, speed):
         pass
