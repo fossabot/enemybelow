@@ -1,0 +1,7 @@
+Consider DEPTH for the sub. 
+
+Each ship (sub included) has a default direction it is pointing. For the submarine, it moves 1 space in this direction after each ship makes its move. It only will change direction if it hits a boundary.
+
+Should we have a "tutorial" mode ? 
+
+
