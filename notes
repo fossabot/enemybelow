@@ -1,0 +1,8 @@
+4 ships, 1 sub. 
+
+sub starts out and only goes in a particular direction unless it hits a boundary, then it turns in 
+a random direction and moves that way again until it hits boundary
+
+sub depth is a CONST for the submarine
+
+ships can fire on the sub when within 3 spaces. Sub can return fire. 
