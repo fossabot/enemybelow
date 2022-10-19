@@ -6,3 +6,9 @@ a random direction and moves that way again until it hits boundary
 sub depth is a CONST for the submarine
 
 ships can fire on the sub when within 3 spaces. Sub can return fire. 
+
+
+ships start at 4 pre-determined starting positions.
+
+Going to need to figure out coding for coordinates on a map - it's going to be a little
+diff than the way we do rogue-like plotting 
